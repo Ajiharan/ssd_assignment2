@@ -39,7 +39,7 @@ app.get("/getUrl", (req, res) => {
       prompt: "consent",
     });
     console.log(authUrl);
-    return res.send(authUrl);
+    return res.status(200).json(authUrl);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -100,6 +100,8 @@ app.post("/driveInfo", (req, res) => {
 app.post("/upload", (req, res) => {
   try {
     const form = new formidable.IncomingForm();
+    console.log(form);
+
     form.parse(req, (err, fields, files) => {
       if (err) return res.status(400).send(err.message);
       const token = JSON.parse(fields.token);
